@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { links } from "@/lib/links";
 
 interface Book {
   title: string;
@@ -96,8 +97,8 @@ function Stars({ rating }: { rating: number }) {
 
 function Row({ label, children }: { label: string; children: React.ReactNode }) {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-[6rem_1fr] gap-1 sm:gap-6 px-4 py-4">
-      <dt className="text-xs font-semibold uppercase tracking-widest text-muted pt-0.5">{label}</dt>
+    <div className="grid grid-cols-1 sm:grid-cols-[6rem_1fr] gap-1 sm:gap-6 px-4 py-4 divide-black">
+      <dt className="text-xs font-semibold uppercase tracking-widest text-muted pt-0.5" style={{fontFamily:"var(--font-inter)"}}>{label}</dt>
       <dd className="text-sm text-muted leading-relaxed">{children}</dd>
     </div>
   );
@@ -108,77 +109,95 @@ function Row({ label, children }: { label: string; children: React.ReactNode }) 
 export default async function Home() {
   const { currentlyReading, read } = await getGoodreadsData();
 
-  return (
-    <div className="flex flex-col gap-16">
+  const BLOCK = "border border-black bg-white";
+  const LABEL = "px-4 py-2 border-b border-black text-sm font-bold uppercase tracking-widest";
 
-      {/* Hero — plain block so float works */}
-      <section className="pt-0 overflow-hidden">
-        <Image
-          src="/profile_photo_2026.jpeg"
-          alt="Leo Hyams"
-          width={220}
-          height={220}
-          style={{ float: "right", marginLeft: "2rem", marginBottom: "0.75rem" }}
-          className="object-cover border border-border"
-          priority
-        />
-        <p className="text-base text-muted leading-relaxed mb-4">
-          I am Leo Hyams, Founder and Executive Director of{" "}
-          <a href="https://www.aisafetysa.com" target="_blank" rel="noopener noreferrer" className="text-foreground underline underline-offset-2 hover:opacity-70 transition-opacity">AI Safety South Africa</a>
-          . This is a capacity-building and research organisation based in Cape
-          Town. Our capacity-building focus is on developing the top talent in
-          Africa to contribute to the frontier of AI safety research and our
-          research focus is broadly on agent governance, and more specifically
-          on agentic capability evaluations and multi-agent safety.
-        </p>
-        <p className="text-base text-muted leading-relaxed mb-4">
-          I&apos;m doing this because I think that AI will be radically
-          transformative, that our societies are not prepared for these changes,
-          and that there is a lot we can do to improve our future outcomes
-          relating to this technology. I&apos;m doing this in Cape Town because:
-        </p>
-        <ul className="list-disc list-outside pl-5 text-base text-muted leading-relaxed mb-4 space-y-1">
-          <li>I grew up here and felt compelled to coordinate among my peer group.</li>
-          <li>I think that South African talent is phenomenal and underappreciated.</li>
-          <li>The AI safety presence in Africa is minimal and by building this organisation I have been able to contribute something unique.</li>
-        </ul>
-        <p className="text-base text-muted leading-relaxed">
-          I&apos;m interested in building physical hubs that are conducive to
-          incredible innovations, such as the{" "}
-          <a href="https://en.wikipedia.org/wiki/Bell_Labs" target="_blank" rel="noopener noreferrer" className="text-foreground underline underline-offset-2 hover:opacity-70 transition-opacity">Bell Labs</a>
-          {" "}or the{" "}
-          <a href="https://en.wikipedia.org/wiki/Santa_Fe_Institute" target="_blank" rel="noopener noreferrer" className="text-foreground underline underline-offset-2 hover:opacity-70 transition-opacity">Santa Fe Institute</a>
-          .
-        </p>
+  return (
+    <div className="flex flex-col">
+
+      {/* About block */}
+      <section className={BLOCK}>
+        <div className={`${LABEL} bg-green-bg text-green`} style={{fontFamily:"var(--font-inter)"}}>About</div>
+
+        {/* Links row directly beneath About subtitle */}
+        <div className="flex divide-x divide-black border-b border-black">
+          {links.map((l) => (
+            <a
+              key={l.href}
+              href={l.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex-1 px-2 py-2 text-center text-xs font-bold uppercase tracking-widest hover:opacity-70 transition-opacity"
+              style={{fontFamily:"var(--font-inter)", color:"var(--orange)"}}
+            >
+              {l.label}
+            </a>
+          ))}
+        </div>
+
+        <div className="overflow-hidden p-5">
+          <Image
+            src="/HuennekensxAISafety27.jpg"
+            alt="Leo Hyams"
+            width={286}
+            height={286}
+            style={{ float: "right", marginLeft: "1.5rem", marginBottom: "0.5rem" }}
+            className="object-cover border-2 border-black"
+            priority
+          />
+          <p className="text-base text-muted leading-relaxed mb-4">
+            I am Leo Hyams, Founder and Executive Director of{" "}
+            <a href="https://www.aisafetysa.com" target="_blank" rel="noopener noreferrer" className="text-foreground underline underline-offset-2 hover:opacity-70 transition-opacity">AI Safety South Africa</a>
+            . This is a capacity-building and research organisation based in Cape
+            Town. Our capacity-building focus is on developing the top talent in
+            Africa to contribute to the frontier of AI safety research and our
+            research focus is broadly on agent governance, and more specifically
+            on agentic capability evaluations and multi-agent safety.
+          </p>
+          <p className="text-base text-muted leading-relaxed mb-4">
+            I&apos;m doing this because I think that AI will be radically
+            transformative, that our societies are not prepared for these changes,
+            and that there is a lot we can do to improve our future outcomes
+            relating to this technology. I&apos;m doing this in Cape Town because:
+          </p>
+          <ul className="list-disc list-outside pl-5 text-base text-muted leading-relaxed mb-4 space-y-1">
+            <li>I grew up here and felt compelled to coordinate among my peer group.</li>
+            <li>I think that South African talent is phenomenal and underappreciated.</li>
+            <li>The AI safety presence in Africa is minimal and by building this organisation I have been able to contribute something unique.</li>
+          </ul>
+          <p className="text-base text-muted leading-relaxed">
+            I&apos;m interested in building physical hubs that are conducive to
+            incredible innovations, such as the{" "}
+            <a href="https://en.wikipedia.org/wiki/Bell_Labs" target="_blank" rel="noopener noreferrer" className="text-foreground underline underline-offset-2 hover:opacity-70 transition-opacity">Bell Labs</a>
+            {" "}or the{" "}
+            <a href="https://en.wikipedia.org/wiki/Santa_Fe_Institute" target="_blank" rel="noopener noreferrer" className="text-foreground underline underline-offset-2 hover:opacity-70 transition-opacity">Santa Fe Institute</a>
+            .
+          </p>
+        </div>
       </section>
 
-      {/* Details */}
-      <section className="border border-border">
-        <div className="px-4 py-2 border-b border-border bg-green-bg">
-          <span className="text-xs font-semibold uppercase tracking-widest text-green">About</span>
-        </div>
-        <dl className="divide-y divide-border">
+      {/* Detail block — no subtitle */}
+      <section className={`${BLOCK} border-t-0`}>
+        <dl className="divide-y divide-black">
           <Row label="Location">Cape Town, though I travel a lot, especially to London.</Row>
           <Row label="Recreation">Mindfulness, exercise, reading, and the outdoors.</Row>
         </dl>
       </section>
 
-      {/* Reading */}
-      <section className="border border-border">
-        <div className="px-4 py-2 border-b border-border bg-blue-bg">
-          <span className="text-xs font-semibold uppercase tracking-widest text-blue">Reading</span>
-        </div>
+      {/* Goodreads block — with gap above */}
+      <section className={`${BLOCK} mt-8`}>
+        <a href="https://www.goodreads.com/user/show/117011949-leo-hyams" target="_blank" rel="noopener noreferrer" className={`${LABEL} bg-blue-bg text-blue underline underline-offset-2 hover:opacity-70 transition-opacity block`} style={{fontFamily:"var(--font-inter)"}}>Goodreads</a>
 
         {currentlyReading.length > 0 && (
-          <div className="flex flex-col gap-4 p-5 border-b border-border">
-            <h3 className="text-xs font-semibold uppercase tracking-widest text-muted">
+          <div className="flex flex-col gap-4 p-5 border-b border-black">
+            <h3 className="text-xs font-bold uppercase tracking-widest text-muted" style={{fontFamily:"var(--font-inter)"}}>
               Currently Reading
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {currentlyReading.map((book) => (
-                <div key={book.link} className="flex gap-3 p-3 border border-border bg-background">
+                <div key={book.link} className="flex gap-3 p-3 border border-black">
                   {book.imageUrl && (
-                    <div className="flex-shrink-0 relative w-[44px] h-[66px] overflow-hidden border border-border">
+                    <div className="flex-shrink-0 relative w-[44px] h-[66px] overflow-hidden border border-black">
                       <Image src={book.imageUrl} alt={book.title} fill className="object-cover" />
                     </div>
                   )}
@@ -196,14 +215,14 @@ export default async function Home() {
 
         {read.length > 0 && (
           <div className="flex flex-col gap-4 p-5">
-            <h3 className="text-xs font-semibold uppercase tracking-widest text-muted">
+            <h3 className="text-xs font-bold uppercase tracking-widest text-muted" style={{fontFamily:"var(--font-inter)"}}>
               Recently Read
             </h3>
-            <div className="flex flex-col divide-y divide-border">
+            <div className="flex flex-col divide-y divide-black">
               {read.map((book, idx) => (
                 <div key={book.link} className={`flex gap-4 items-start ${idx > 0 ? "pt-5" : ""} ${idx < read.length - 1 ? "pb-5" : ""}`}>
                   {book.imageUrl && (
-                    <div className="flex-shrink-0 relative w-[50px] h-[75px] border border-border overflow-hidden">
+                    <div className="flex-shrink-0 relative w-[50px] h-[75px] border border-black overflow-hidden">
                       <Image src={book.imageUrl} alt={book.title} fill className="object-cover" />
                     </div>
                   )}
@@ -230,12 +249,7 @@ export default async function Home() {
         {currentlyReading.length === 0 && read.length === 0 && (
           <div className="p-5 text-sm text-muted">
             Could not fetch reading list at the moment. Visit my{" "}
-            <a
-              href="https://www.goodreads.com/user/show/117011949-leo-hyams"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="underline hover:text-foreground transition-colors"
-            >
+            <a href="https://www.goodreads.com/user/show/117011949-leo-hyams" target="_blank" rel="noopener noreferrer" className="underline hover:text-foreground transition-colors">
               Goodreads profile
             </a>{" "}
             to see what I&apos;m reading.

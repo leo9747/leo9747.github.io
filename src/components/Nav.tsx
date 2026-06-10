@@ -2,38 +2,27 @@
 
 import Link from "next/link";
 
-const links = [
-  { href: "https://www.linkedin.com/in/leo-hyams-63960a163/", label: "LinkedIn", external: true },
-  { href: "https://substack.com/@leonidasaurelius", label: "Substack", external: true },
-  { href: "https://www.goodreads.com/user/show/117011949-leo-hyams", label: "Goodreads", external: true },
-  { href: "https://www.instagram.com/king.griffon/", label: "Art", external: true },
-  { href: "https://x.com/leo_hyams", label: "X", external: true },
-];
-
 export default function Nav() {
   return (
     <header className="bg-background">
-      <div className="w-full max-w-2xl mx-auto px-6 pt-12 pb-2 flex flex-col gap-4">
-        <Link
-          href="/"
-          className="text-3xl font-semibold tracking-tight hover:opacity-70 transition-opacity"
-        >
-          Leo Hyams
-        </Link>
-        <ul className="flex items-center gap-5 text-xs tracking-widest uppercase font-bold" style={{fontFamily: "var(--font-inter)", color: "var(--orange)"}}>
-          {links.map((l) => (
-            <li key={l.href}>
-              <a
-                href={l.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:opacity-70 transition-opacity"
-              >
-                {l.label}
-              </a>
-            </li>
+      <div className="w-full max-w-2xl mx-auto px-6 pt-10 pb-0">
+
+        {/* Title block */}
+        <div className="border border-black px-5 py-4 bg-white">
+          <Link href="/" className="text-4xl font-semibold tracking-tight hover:opacity-70 transition-opacity" style={{fontFamily:"var(--font-lora)", textDecoration:"none"}}>
+            Leo Hyams
+          </Link>
+        </div>
+
+        {/* Themes block */}
+        <div className="border border-black border-t-0 flex divide-x divide-black bg-white" style={{fontFamily: "var(--font-inter)"}}>
+          {["Nature", "Humanity", "Technology"].map((t) => (
+            <div key={t} className="flex-1 px-4 py-2 text-center text-xs font-bold uppercase tracking-widest text-muted">
+              {t}
+            </div>
           ))}
-        </ul>
+        </div>
+
       </div>
     </header>
   );

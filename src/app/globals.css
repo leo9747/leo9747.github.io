@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --background: #fdfcfa;
+  --background: #f7f4ef;
   --foreground: #111110;
   --muted: #6b6b6b;
   --border: #c9c5bf;
@@ -47,6 +47,11 @@ body {
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+}
+
+a {
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
 }
 
 /* UI chrome (nav, labels, buttons) uses Inter */
