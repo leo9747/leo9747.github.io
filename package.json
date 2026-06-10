@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
-    "build": "next build",
-    "start": "next start",
+    "dev": "ulimit -n 65536 2>/dev/null; next dev --turbopack",
+    "build": "ulimit -n 65536 2>/dev/null; next build",
+    "start": "ulimit -n 65536 2>/dev/null; next start",
     "lint": "next lint"
   },
   "dependencies": {

@@ -1,26 +1,60 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #fdfcfa;
+  --foreground: #111110;
+  --muted: #6b6b6b;
+  --border: #c9c5bf;
+
+  /* Accent palette */
+  --green: #8a9a5b;
+  --orange: #e8836a;
+  --blue: #7aafc4;
+
+  --green-bg: #f3f5ec;
+  --orange-bg: #fdf1ee;
+  --blue-bg: #eef5f9;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-green: var(--green);
+  --color-orange: var(--orange);
+  --color-blue: var(--blue);
+  --color-green-bg: var(--green-bg);
+  --color-orange-bg: var(--orange-bg);
+  --color-blue-bg: var(--blue-bg);
+
+  /* Font roles */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-lora), ui-serif, Georgia, serif;
+  --font-mono: var(--font-mono), ui-monospace, monospace;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  /* Body text uses serif (Lora) — like Goodfire's editorial feel */
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* UI chrome (nav, labels, buttons) uses Inter */
+.font-ui {
+  font-family: var(--font-sans);
+}
+
+/* Metadata / tags use JetBrains Mono */
+.font-code {
+  font-family: var(--font-mono);
 }

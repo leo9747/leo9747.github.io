@@ -1,103 +1,248 @@
 import Image from "next/image";
 
-export default function Home() {
+interface Book {
+  title: string;
+  author: string;
+  imageUrl: string;
+  link: string;
+  rating?: number;
+  review?: string;
+}
+
+function parseBooks(xmlText: string): Book[] {
+  const books: Book[] = [];
+  if (!xmlText) return books;
+
+  const items = xmlText.split("<item>");
+  for (let i = 1; i < items.length; i++) {
+    const item = items[i].split("</item>")[0];
+
+    let title = "";
+    const titleMatch = item.match(/<title>(?:<!\[CDATA\[)?(.*?)(?:\]\]>)?<\/title>/);
+    if (titleMatch) title = titleMatch[1].trim();
+
+    let author = "";
+    const authorMatch = item.match(/<author_name>(?:<!\[CDATA\[)?(.*?)(?:\]\]>)?<\/author_name>/);
+    if (authorMatch) author = authorMatch[1].trim();
+
+    let imageUrl = "";
+    const largeImgMatch = item.match(/<book_large_image_url>(?:<!\[CDATA\[)?(.*?)(?:\]\]>)?<\/book_large_image_url>/);
+    if (largeImgMatch) {
+      imageUrl = largeImgMatch[1].trim();
+    } else {
+      const mediumImgMatch = item.match(/<book_medium_image_url>(?:<!\[CDATA\[)?(.*?)(?:\]\]>)?<\/book_medium_image_url>/);
+      if (mediumImgMatch) imageUrl = mediumImgMatch[1].trim();
+    }
+
+    let link = "";
+    const linkMatch = item.match(/<link>(?:<!\[CDATA\[)?(.*?)(?:\]\]>)?<\/link>/);
+    if (linkMatch) link = linkMatch[1].trim();
+
+    let rating = 0;
+    const ratingMatch = item.match(/<user_rating>(?:<!\[CDATA\[)?(.*?)(?:\]\]>)?<\/user_rating>/);
+    if (ratingMatch) rating = parseInt(ratingMatch[1].trim(), 10) || 0;
+
+    let review = "";
+    const reviewMatch = item.match(/<user_review>(?:<!\[CDATA\[)?([\s\S]*?)(?:\]\]>)?<\/user_review>/);
+    if (reviewMatch) {
+      review = reviewMatch[1].trim();
+      review = review
+        .replace(/<br\s*\/?>/gi, "\n")
+        .replace(/<[^>]*>/g, "")
+        .replace(/&amp;/g, "&")
+        .replace(/&quot;/g, '"')
+        .replace(/&#39;/g, "'")
+        .trim();
+    }
+
+    if (title && author) {
+      books.push({ title, author, imageUrl, link, rating, review });
+    }
+  }
+  return books;
+}
+
+async function getGoodreadsData() {
+  try {
+    const [currentlyReadingRes, readRes] = await Promise.all([
+      fetch("https://www.goodreads.com/review/list_rss/117011949?shelf=currently-reading", { next: { revalidate: 3600 } }),
+      fetch("https://www.goodreads.com/review/list_rss/117011949?shelf=read", { next: { revalidate: 3600 } }),
+    ]);
+
+    const currentlyReadingXml = currentlyReadingRes.ok ? await currentlyReadingRes.text() : "";
+    const readXml = readRes.ok ? await readRes.text() : "";
+
+    return {
+      currentlyReading: parseBooks(currentlyReadingXml),
+      read: parseBooks(readXml).slice(0, 3),
+    };
+  } catch (error) {
+    console.error("Error fetching Goodreads data:", error);
+    return { currentlyReading: [], read: [] };
+  }
+}
+
+function Stars({ rating }: { rating: number }) {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
+    <div className="flex gap-0.5 text-amber-500">
+      {Array.from({ length: 5 }).map((_, i) => (
+        <span key={i} className="text-xs">
+          {i < rating ? "★" : "☆"}
+        </span>
+      ))}
+    </div>
+  );
+}
+
+function Row({ label, children }: { label: string; children: React.ReactNode }) {
+  return (
+    <div className="grid grid-cols-1 sm:grid-cols-[6rem_1fr] gap-1 sm:gap-6 px-4 py-4">
+      <dt className="text-xs font-semibold uppercase tracking-widest text-muted pt-0.5">{label}</dt>
+      <dd className="text-sm text-muted leading-relaxed">{children}</dd>
+    </div>
+  );
+}
+
+
+
+export default async function Home() {
+  const { currentlyReading, read } = await getGoodreadsData();
+
+  return (
+    <div className="flex flex-col gap-16">
+
+      {/* Hero — plain block so float works */}
+      <section className="pt-0 overflow-hidden">
         <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
+          src="/profile_photo_2026.jpeg"
+          alt="Leo Hyams"
+          width={220}
+          height={220}
+          style={{ float: "right", marginLeft: "2rem", marginBottom: "0.75rem" }}
+          className="object-cover border border-border"
           priority
         />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+        <p className="text-base text-muted leading-relaxed mb-4">
+          I am Leo Hyams, Founder and Executive Director of{" "}
+          <a href="https://www.aisafetysa.com" target="_blank" rel="noopener noreferrer" className="text-foreground underline underline-offset-2 hover:opacity-70 transition-opacity">AI Safety South Africa</a>
+          . This is a capacity-building and research organisation based in Cape
+          Town. Our capacity-building focus is on developing the top talent in
+          Africa to contribute to the frontier of AI safety research and our
+          research focus is broadly on agent governance, and more specifically
+          on agentic capability evaluations and multi-agent safety.
+        </p>
+        <p className="text-base text-muted leading-relaxed mb-4">
+          I&apos;m doing this because I think that AI will be radically
+          transformative, that our societies are not prepared for these changes,
+          and that there is a lot we can do to improve our future outcomes
+          relating to this technology. I&apos;m doing this in Cape Town because:
+        </p>
+        <ul className="list-disc list-outside pl-5 text-base text-muted leading-relaxed mb-4 space-y-1">
+          <li>I grew up here and felt compelled to coordinate among my peer group.</li>
+          <li>I think that South African talent is phenomenal and underappreciated.</li>
+          <li>The AI safety presence in Africa is minimal and by building this organisation I have been able to contribute something unique.</li>
+        </ul>
+        <p className="text-base text-muted leading-relaxed">
+          I&apos;m interested in building physical hubs that are conducive to
+          incredible innovations, such as the{" "}
+          <a href="https://en.wikipedia.org/wiki/Bell_Labs" target="_blank" rel="noopener noreferrer" className="text-foreground underline underline-offset-2 hover:opacity-70 transition-opacity">Bell Labs</a>
+          {" "}or the{" "}
+          <a href="https://en.wikipedia.org/wiki/Santa_Fe_Institute" target="_blank" rel="noopener noreferrer" className="text-foreground underline underline-offset-2 hover:opacity-70 transition-opacity">Santa Fe Institute</a>
+          .
+        </p>
+      </section>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+      {/* Details */}
+      <section className="border border-border">
+        <div className="px-4 py-2 border-b border-border bg-green-bg">
+          <span className="text-xs font-semibold uppercase tracking-widest text-green">About</span>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+        <dl className="divide-y divide-border">
+          <Row label="Location">Cape Town, though I travel a lot, especially to London.</Row>
+          <Row label="Recreation">Mindfulness, exercise, reading, and the outdoors.</Row>
+        </dl>
+      </section>
+
+      {/* Reading */}
+      <section className="border border-border">
+        <div className="px-4 py-2 border-b border-border bg-blue-bg">
+          <span className="text-xs font-semibold uppercase tracking-widest text-blue">Reading</span>
+        </div>
+
+        {currentlyReading.length > 0 && (
+          <div className="flex flex-col gap-4 p-5 border-b border-border">
+            <h3 className="text-xs font-semibold uppercase tracking-widest text-muted">
+              Currently Reading
+            </h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {currentlyReading.map((book) => (
+                <div key={book.link} className="flex gap-3 p-3 border border-border bg-background">
+                  {book.imageUrl && (
+                    <div className="flex-shrink-0 relative w-[44px] h-[66px] overflow-hidden border border-border">
+                      <Image src={book.imageUrl} alt={book.title} fill className="object-cover" />
+                    </div>
+                  )}
+                  <div className="flex flex-col justify-center gap-1 min-w-0">
+                    <a href={book.link} target="_blank" rel="noopener noreferrer" className="font-medium text-sm hover:underline leading-snug truncate" title={book.title}>
+                      {book.title}
+                    </a>
+                    <span className="text-xs text-muted truncate">by {book.author}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {read.length > 0 && (
+          <div className="flex flex-col gap-4 p-5">
+            <h3 className="text-xs font-semibold uppercase tracking-widest text-muted">
+              Recently Read
+            </h3>
+            <div className="flex flex-col divide-y divide-border">
+              {read.map((book, idx) => (
+                <div key={book.link} className={`flex gap-4 items-start ${idx > 0 ? "pt-5" : ""} ${idx < read.length - 1 ? "pb-5" : ""}`}>
+                  {book.imageUrl && (
+                    <div className="flex-shrink-0 relative w-[50px] h-[75px] border border-border overflow-hidden">
+                      <Image src={book.imageUrl} alt={book.title} fill className="object-cover" />
+                    </div>
+                  )}
+                  <div className="flex flex-col gap-2 flex-1 min-w-0">
+                    <div className="flex flex-col gap-0.5">
+                      <a href={book.link} target="_blank" rel="noopener noreferrer" className="font-medium text-sm hover:underline leading-snug text-foreground">
+                        {book.title}
+                      </a>
+                      <span className="text-xs text-muted">by {book.author}</span>
+                      {book.rating ? <Stars rating={book.rating} /> : null}
+                    </div>
+                    {book.review && (
+                      <p className="text-sm text-muted leading-relaxed whitespace-pre-wrap italic">
+                        &ldquo;{book.review}&rdquo;
+                      </p>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {currentlyReading.length === 0 && read.length === 0 && (
+          <div className="p-5 text-sm text-muted">
+            Could not fetch reading list at the moment. Visit my{" "}
+            <a
+              href="https://www.goodreads.com/user/show/117011949-leo-hyams"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline hover:text-foreground transition-colors"
+            >
+              Goodreads profile
+            </a>{" "}
+            to see what I&apos;m reading.
+          </div>
+        )}
+      </section>
+
     </div>
   );
 }
