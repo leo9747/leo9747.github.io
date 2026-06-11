@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { links } from "@/lib/links";
+import ContactForm from "@/components/ContactForm";
 
 interface Book {
   title: string;
@@ -259,6 +260,12 @@ export default async function Home() {
             to see what I&apos;m reading.
           </div>
         )}
+      </section>
+
+      {/* Contact block */}
+      <section className={`${BLOCK} mt-8`}>
+        <div className={`${LABEL} bg-orange-bg text-orange`} style={{fontFamily:"var(--font-inter)"}}>Contact</div>
+        <ContactForm />
       </section>
 
     </div>
