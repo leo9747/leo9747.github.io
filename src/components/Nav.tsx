@@ -15,9 +15,9 @@ export default function Nav() {
         </div>
 
         {/* Themes block */}
-        <div className="border border-black border-t-0 flex divide-x divide-black bg-white" style={{fontFamily: "var(--font-inter)"}}>
-          {["Nature", "Humanity", "Technology"].map((t) => (
-            <div key={t} className="flex-1 px-4 py-2 text-center text-xs font-bold uppercase tracking-widest text-muted">
+        <div className="border border-black border-t-0 flex bg-white" style={{fontFamily: "var(--font-inter)"}}>
+          {["Nature", "Humanity", "Technology"].map((t, i) => (
+            <div key={t} className={`flex-1 py-2 text-center text-xs font-bold uppercase tracking-widest text-muted ${i > 0 ? "border-l border-black" : ""}`}>
               {t}
             </div>
           ))}

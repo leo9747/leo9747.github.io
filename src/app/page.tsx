@@ -119,15 +119,19 @@ export default async function Home() {
       <section className={BLOCK}>
         <div className={`${LABEL} bg-green-bg text-green`} style={{fontFamily:"var(--font-inter)"}}>About</div>
 
-        {/* Links row directly beneath About subtitle */}
-        <div className="flex divide-x divide-black border-b border-black">
-          {links.map((l) => (
+        {/* Links — 3 cols on mobile, all in one row on desktop */}
+        <div className="grid grid-cols-3 sm:grid-cols-6 border-b border-black">
+          {links.map((l, i) => (
             <a
               key={l.href}
               href={l.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex-1 px-2 py-2 text-center text-xs font-bold uppercase tracking-widest hover:opacity-70 transition-opacity"
+              className={`px-2 py-2 text-center text-xs font-bold uppercase tracking-widest hover:opacity-70 transition-opacity border-black
+                ${i % 3 !== 0 ? "border-l" : ""}
+                ${i >= 3 ? "border-t sm:border-t-0" : ""}
+                ${i >= 3 && i % 3 === 0 ? "sm:border-l" : ""}
+              `}
               style={{fontFamily:"var(--font-inter)", color:"var(--orange)"}}
             >
               {l.label}
