@@ -31,6 +31,10 @@ export const metadata: Metadata = {
   },
   description:
     "Leo Hyams — Founder and Executive Director of AI Safety South Africa, working to reduce global catastrophic risk from advanced AI.",
+  icons: {
+    icon: "/trinity_penrose_favicon.png",
+    apple: "/trinity_penrose_favicon.png",
+  },
 };
 
 export default function RootLayout({

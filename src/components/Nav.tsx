@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export default function Nav() {
   return (
-    <header className="bg-background">
+    <header className="bg-transparent">
       <div className="w-full max-w-2xl mx-auto px-6 pt-10 pb-0">
 
         {/* Title block */}
