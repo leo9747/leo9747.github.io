@@ -177,20 +177,17 @@ export default async function Home() {
             I&apos;m doing this in Cape Town because:
           </p>
           <ul className="list-disc list-outside pl-5 text-base text-muted leading-relaxed mb-4 space-y-1">
-            <li>I grew up here and felt compelled to coordinate among my peer group.</li>
+            <li>I grew up here and felt compelled to coordinate among my peer group. It&apos;s a beautiful, world-class city that is well situated to be a Schelling point for coordinating around AI risks and opportunities.</li>
             <li>I think that South African talent is phenomenal and underappreciated.</li>
             <li>The AI safety presence in Africa is minimal and by building this organisation I have been able to contribute something unique.</li>
           </ul>
-          <p className="text-base text-muted leading-relaxed mb-4">
+          <p className="text-base text-muted leading-relaxed">
             I&apos;m interested in building physical hubs that are conducive to
             incredible innovations, such as the{" "}
             <a href="https://en.wikipedia.org/wiki/Bell_Labs" target="_blank" rel="noopener noreferrer" className="text-foreground underline underline-offset-2 hover:opacity-70 transition-opacity">Bell Labs</a>
             {" "}or the{" "}
             <a href="https://en.wikipedia.org/wiki/Santa_Fe_Institute" target="_blank" rel="noopener noreferrer" className="text-foreground underline underline-offset-2 hover:opacity-70 transition-opacity">Santa Fe Institute</a>
-            .
-          </p>
-          <p className="text-base text-muted leading-relaxed">
-            I&apos;m very attracted to the{" "}
+            . I&apos;m also very attracted to the{" "}
             <a href="https://en.wikipedia.org/wiki/Solarpunk" target="_blank" rel="noopener noreferrer" className="text-foreground underline underline-offset-2 hover:opacity-70 transition-opacity">Solarpunk</a>
             {" "}movement, and I believe that keeping{" "}
             <a href="https://en.wikipedia.org/wiki/Existential_hope" target="_blank" rel="noopener noreferrer" className="text-foreground underline underline-offset-2 hover:opacity-70 transition-opacity">Existential Hope</a>
