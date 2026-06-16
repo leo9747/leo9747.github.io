@@ -3,6 +3,7 @@ import { Inter, Lora, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
+import TableOfContents from "@/components/TableOfContents";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -48,9 +49,20 @@ export default function RootLayout({
         className={`${inter.variable} ${lora.variable} ${jetbrainsMono.variable} antialiased min-h-screen flex flex-col`}
       >
         <Nav />
-        <main className="flex-1 w-full max-w-2xl mx-auto px-6 pt-8 pb-16">
-          {children}
-        </main>
+        <div className="flex-1 w-full max-w-6xl mx-auto px-6 pt-1 pb-16">
+          <div className="flex gap-8">
+            {/* Left TOC column — only visible on lg+ */}
+            <div className="hidden lg:block w-44 xl:w-52 flex-shrink-0">
+              <TableOfContents />
+            </div>
+            {/* Main content */}
+            <main className="flex-1 min-w-0 max-w-2xl">
+              {children}
+            </main>
+            {/* Mirror column to keep content centred */}
+            <div className="hidden lg:block w-44 xl:w-52 flex-shrink-0" />
+          </div>
+        </div>
         <Footer />
       </body>
     </html>

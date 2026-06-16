@@ -117,7 +117,7 @@ export default async function Home() {
     <div className="flex flex-col">
 
       {/* About block */}
-      <section className={BLOCK}>
+      <section id="about" className={BLOCK}>
         <div className={`${LABEL} bg-green-bg text-green`} style={{fontFamily:"var(--font-inter)"}}>About</div>
 
         {/* Links — 3 cols on mobile, all in one row on desktop */}
@@ -186,16 +186,16 @@ export default async function Home() {
       </section>
 
       {/* Detail block — no subtitle */}
-      <section className={`${BLOCK} border-t-0`}>
+      <section id="detail" className={`${BLOCK} border-t-0`}>
         <dl className="divide-y divide-black">
           <Row label="Location">Cape Town, though I travel a lot, especially to London.</Row>
           <Row label="Recreation">Mindfulness, exercise, reading, and the outdoors.</Row>
         </dl>
       </section>
 
-      {/* Goodreads block — with gap above */}
-      <section className={`${BLOCK} mt-8`}>
-        <a href="https://www.goodreads.com/user/show/117011949-leo-hyams" target="_blank" rel="noopener noreferrer" className={`${LABEL} bg-blue-bg text-blue underline underline-offset-2 hover:opacity-70 transition-opacity block`} style={{fontFamily:"var(--font-inter)"}}>Goodreads</a>
+      {/* Reading block — with gap above */}
+      <section id="reading" className={`${BLOCK} mt-8`}>
+        <a href="https://www.goodreads.com/user/show/117011949-leo-hyams" target="_blank" rel="noopener noreferrer" className={`${LABEL} bg-blue-bg text-blue underline underline-offset-2 hover:opacity-70 transition-opacity block`} style={{fontFamily:"var(--font-inter)"}}>Reading</a>
 
         {currentlyReading.length > 0 && (
           <div className="flex flex-col gap-4 p-5 border-b border-black">
@@ -267,7 +267,7 @@ export default async function Home() {
       </section>
 
       {/* Contact block */}
-      <section className={`${BLOCK} mt-8`}>
+      <section id="contact" className={`${BLOCK} mt-8`}>
         <div className={`${LABEL} bg-orange-bg text-orange`} style={{fontFamily:"var(--font-inter)"}}>Contact</div>
         <ContactForm />
       </section>
