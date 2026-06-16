@@ -155,19 +155,26 @@ export default async function Home() {
             <a href="https://www.aisafetysa.com" target="_blank" rel="noopener noreferrer" className="text-foreground underline underline-offset-2 hover:opacity-70 transition-opacity">AI Safety South Africa</a>
             . This is a capacity-building and research organisation based in Cape
             Town. Our capacity-building focus is on developing the top talent in
-            Africa to contribute to the frontier of AI safety research.
-            On this front, we recently hosted the{" "}
+            Africa to contribute to the frontier of AI safety research. On this
+            front, we recently hosted the{" "}
             <a href="https://www.cai-research-fellowship.com" target="_blank" rel="noopener noreferrer" className="text-foreground underline underline-offset-2 hover:opacity-70 transition-opacity">Cooperative AI Research Fellowship</a>
-            {" "}at our hub in Cape Town. Our research focus is broadly on agent governance,
-            and more specifically on agentic capability evaluations and multi-agent safety.
-            Here, we have worked closely with the UK AI Security Institute&apos;s Science of
-            Evaluations team to develop novel methods for predicting agentic capabilities.
+            {" "}at our hub in Cape Town. Our research focus is broadly on agent
+            governance and we have worked closely with the UK AI Security
+            Institute&apos;s Science of Evaluations team to develop novel methods for
+            predicting agentic capabilities. We recently got general support
+            funding to continue our hub building efforts for another two years.
+            With this, we will be launching the Cape Institute for Safe AI
+            (CISAI), which will include an AI safety co-working space and a
+            multi-agent safety lab.
           </p>
           <p className="text-base text-muted leading-relaxed mb-4">
-            I&apos;m broadly in this line of work because I think that AI will be radically
-            transformative, that our societies are not prepared for these changes,
-            and that there is a lot we can do to improve our future outcomes
-            relating to this technology. I&apos;m doing this in Cape Town because:
+            I&apos;m broadly in this line of work because I think that AI will be
+            radically transformative, that our societies are not prepared for
+            these changes, and that there is a lot we can do to improve our
+            future outcomes relating to this technology.
+          </p>
+          <p className="text-base text-muted leading-relaxed mb-4">
+            I&apos;m doing this in Cape Town because:
           </p>
           <ul className="list-disc list-outside pl-5 text-base text-muted leading-relaxed mb-4 space-y-1">
             <li>I grew up here and felt compelled to coordinate among my peer group.</li>
