@@ -141,15 +141,17 @@ export default async function Home() {
         </div>
 
         <div className="overflow-hidden p-5">
-          <Image
-            src="/HuennekensxAISafety27.jpg"
-            alt="Leo Hyams"
-            width={286}
-            height={286}
-            style={{ float: "right", marginLeft: "1.5rem", marginBottom: "0.5rem" }}
-            className="object-cover border-2 border-black"
-            priority
-          />
+          {/* Centered on mobile, floated right on sm+ */}
+          <div className="sm:float-right sm:ml-6 sm:mb-2 flex justify-center mb-5 sm:mb-0 sm:block">
+            <Image
+              src="/HuennekensxAISafety27.jpg"
+              alt="Leo Hyams"
+              width={286}
+              height={286}
+              className="object-cover border-2 border-black"
+              priority
+            />
+          </div>
           <p className="text-base text-muted leading-relaxed mb-4">
             I am Leo Hyams, Founder and Executive Director of{" "}
             <a href="https://www.aisafetysa.com" target="_blank" rel="noopener noreferrer" className="text-foreground underline underline-offset-2 hover:opacity-70 transition-opacity">AI Safety South Africa</a>

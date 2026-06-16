@@ -4,9 +4,9 @@ import Link from "next/link";
 import { useState } from "react";
 
 const sections = [
-  { id: "about",   label: "About" },
-  { id: "reading", label: "Reading" },
-  { id: "contact", label: "Contact" },
+  { id: "about",   label: "About",   color: "var(--green)",  bg: "var(--green-bg)" },
+  { id: "reading", label: "Reading", color: "var(--blue)",   bg: "var(--blue-bg)" },
+  { id: "contact", label: "Contact", color: "var(--orange)", bg: "var(--orange-bg)" },
 ];
 
 export default function Nav() {
@@ -42,12 +42,12 @@ export default function Nav() {
         {/* Hamburger dropdown */}
         {open && (
           <div className="lg:hidden border border-black border-t-0 bg-white flex flex-col divide-y divide-black">
-            {sections.map(({ id, label }) => (
+            {sections.map(({ id, label, color, bg }) => (
               <button
                 key={id}
                 onClick={() => scrollTo(id)}
-                className="px-5 py-3 text-center text-xs font-bold uppercase tracking-widest hover:opacity-70 transition-opacity w-full"
-                style={{fontFamily:"var(--font-inter)", color:"var(--orange)", textDecoration:"none"}}
+                className="px-5 py-3 text-center text-sm font-bold uppercase tracking-widest hover:opacity-70 transition-opacity w-full"
+                style={{fontFamily:"var(--font-inter)", color, background: bg, textDecoration:"none"}}
               >
                 {label}
               </button>
