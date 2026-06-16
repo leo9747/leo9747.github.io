@@ -33,12 +33,11 @@ export default function TableOfContents() {
   }, []);
 
   return (
-    <nav className="hidden lg:block sticky top-10 border border-black bg-white" style={{fontFamily:"var(--font-inter)"}}>
+    <nav className="hidden lg:block border border-black bg-white" style={{fontFamily:"var(--font-inter)"}}>
       {/* Contents header */}
-      <div className="px-4 py-2 border-b border-black text-xs font-bold uppercase tracking-widest bg-white text-foreground">
+      <div className="px-4 py-2 border-b border-black text-sm font-bold uppercase tracking-widest bg-white text-foreground">
         Contents
       </div>
-      {/* Section links */}
       {sections.map(({ id, label, color, bg }) => {
         const isActive = active === id;
         return (
@@ -49,7 +48,7 @@ export default function TableOfContents() {
               e.preventDefault();
               document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
             }}
-            className="flex items-center px-4 py-2 text-xs font-bold uppercase tracking-widest border-b border-black last:border-b-0 hover:opacity-70 transition-opacity"
+            className="flex items-center px-4 py-2 text-sm font-bold uppercase tracking-widest border-b border-black last:border-b-0 hover:opacity-70 transition-opacity"
             style={{
               color,
               background: isActive ? bg : "white",

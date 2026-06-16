@@ -49,10 +49,10 @@ export default function RootLayout({
         className={`${inter.variable} ${lora.variable} ${jetbrainsMono.variable} antialiased min-h-screen flex flex-col`}
       >
         <Nav />
-        <div className="flex-1 w-full px-6 pt-1 pb-16">
+        <div className="flex-1 w-full px-6 pt-8 pb-16">
           <div className="relative max-w-2xl mx-auto">
-            {/* Left TOC — positioned absolutely outside the content column */}
-            <div className="hidden lg:block absolute right-full mr-8 top-0 w-44">
+            {/* Left TOC — sticky, positioned outside the content column */}
+            <div className="hidden lg:block sticky top-8 float-left -ml-52 w-44 h-0">
               <TableOfContents />
             </div>
             {/* Main content */}
