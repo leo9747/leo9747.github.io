@@ -177,7 +177,8 @@ export default async function Home() {
             I&apos;m doing this in Cape Town because:
           </p>
           <ul className="list-disc list-outside pl-5 text-base text-muted leading-relaxed mb-4 space-y-1">
-            <li>I grew up here and felt compelled to coordinate among my peer group. It&apos;s a beautiful, world-class city that is well situated to be a Schelling point for coordinating around AI risks and opportunities.</li>
+            <li>I grew up here and felt compelled to coordinate among my peer group.</li>
+            <li>It&apos;s a beautiful, world-class city that is well situated to be a Schelling point for coordinating around AI risks and opportunities.</li>
             <li>I think that South African talent is phenomenal and underappreciated.</li>
             <li>The AI safety presence in Africa is minimal and by building this organisation I have been able to contribute something unique.</li>
           </ul>
