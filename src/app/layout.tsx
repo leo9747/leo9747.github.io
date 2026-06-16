@@ -49,18 +49,16 @@ export default function RootLayout({
         className={`${inter.variable} ${lora.variable} ${jetbrainsMono.variable} antialiased min-h-screen flex flex-col`}
       >
         <Nav />
-        <div className="flex-1 w-full max-w-6xl mx-auto px-6 pt-1 pb-16">
-          <div className="flex gap-8">
-            {/* Left TOC column — only visible on lg+ */}
-            <div className="hidden lg:block w-44 xl:w-52 flex-shrink-0">
+        <div className="flex-1 w-full px-6 pt-1 pb-16">
+          <div className="relative max-w-2xl mx-auto">
+            {/* Left TOC — positioned absolutely outside the content column */}
+            <div className="hidden lg:block absolute right-full mr-8 top-0 w-44">
               <TableOfContents />
             </div>
             {/* Main content */}
-            <main className="flex-1 min-w-0 max-w-2xl">
+            <main>
               {children}
             </main>
-            {/* Mirror column to keep content centred */}
-            <div className="hidden lg:block w-44 xl:w-52 flex-shrink-0" />
           </div>
         </div>
         <Footer />

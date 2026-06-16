@@ -3,10 +3,9 @@
 import { useEffect, useState } from "react";
 
 const sections = [
-  { id: "about", label: "About" },
-  { id: "detail", label: "Detail" },
-  { id: "reading", label: "Reading" },
-  { id: "contact", label: "Contact" },
+  { id: "about",   label: "About",   color: "var(--green)",  bg: "var(--green-bg)" },
+  { id: "reading", label: "Reading", color: "var(--blue)",   bg: "var(--blue-bg)" },
+  { id: "contact", label: "Contact", color: "var(--orange)", bg: "var(--orange-bg)" },
 ];
 
 export default function TableOfContents() {
@@ -34,11 +33,13 @@ export default function TableOfContents() {
   }, []);
 
   return (
-    <nav className="hidden lg:flex flex-col gap-1 sticky top-16 pt-2">
-      <p className="text-xs font-bold uppercase tracking-widest text-muted mb-3" style={{fontFamily:"var(--font-inter)"}}>
+    <nav className="hidden lg:block sticky top-10 border border-black bg-white" style={{fontFamily:"var(--font-inter)"}}>
+      {/* Contents header */}
+      <div className="px-4 py-2 border-b border-black text-xs font-bold uppercase tracking-widest bg-white text-foreground">
         Contents
-      </p>
-      {sections.map(({ id, label }) => {
+      </div>
+      {/* Section links */}
+      {sections.map(({ id, label, color, bg }) => {
         const isActive = active === id;
         return (
           <a
@@ -48,17 +49,13 @@ export default function TableOfContents() {
               e.preventDefault();
               document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
             }}
-            className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest transition-all hover:opacity-70"
+            className="flex items-center px-4 py-2 text-xs font-bold uppercase tracking-widest border-b border-black last:border-b-0 hover:opacity-70 transition-opacity"
             style={{
-              fontFamily: "var(--font-inter)",
-              color: isActive ? "var(--orange)" : "var(--muted)",
+              color,
+              background: isActive ? bg : "white",
               textDecoration: "none",
             }}
           >
-            <span
-              className="inline-block w-0.5 h-4 transition-all"
-              style={{ background: isActive ? "var(--orange)" : "transparent" }}
-            />
             {label}
           </a>
         );
