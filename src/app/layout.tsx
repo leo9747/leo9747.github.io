@@ -50,7 +50,7 @@ export default function RootLayout({
       >
         <Nav />
         <div className="flex-1 w-full pt-8 pb-16">
-          <div className="relative max-w-2xl mx-auto px-6">
+          <div className="relative max-w-3xl mx-auto px-6">
             {/* Left TOC — sticky, positioned outside the content column */}
             <div className="hidden lg:block sticky top-8 float-left -ml-52 w-44 h-0">
               <TableOfContents />
