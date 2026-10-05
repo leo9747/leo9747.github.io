@@ -154,47 +154,38 @@ export default async function Home() {
           </div>
           <p className="text-base text-muted leading-relaxed mb-4">
             I am Leo Hyams, Founder and Executive Director of{" "}
-            <a href="https://www.aisafetysa.com" target="_blank" rel="noopener noreferrer" className="text-foreground underline underline-offset-2 hover:opacity-70 transition-opacity">AI Safety South Africa</a>
-            . This is a capacity-building and research organisation based in Cape
-            Town. Our capacity-building focus is on developing the top talent in
-            Africa to contribute to the frontier of AI safety research. On this
-            front, we recently hosted the{" "}
-            <a href="https://www.cai-research-fellowship.com" target="_blank" rel="noopener noreferrer" className="text-foreground underline underline-offset-2 hover:opacity-70 transition-opacity">Cooperative AI Research Fellowship</a>
-            {" "}at our hub in Cape Town. Our research focus is broadly on agent
-            governance and we have worked closely with the UK AI Security
-            Institute&apos;s Science of Evaluations team to develop novel methods for
-            predicting agentic capabilities. We recently got general support
-            funding to continue our hub building efforts for another two years.
-            With this, we will be launching the Cape Institute for Safe AI
-            (CISAI), which will include an AI safety co-working space and a
-            multi-agent safety lab.
+            <a href="https://www.cisai.co" target="_blank" rel="noopener noreferrer" className="text-foreground underline underline-offset-2 hover:opacity-70 transition-opacity">the Cape Institute for Safe AI</a>
+            {" "}(CISAI). CISAI is a frontier technology hub based in Cape Town,
+            South Africa, that is aimed at improving systemic resilience,
+            coordination capability, and human empowerment, particularly in
+            relation to advanced AI. Through this organisation, I have
+            facilitated AI safety research that has been published at top
+            academic AI conferences (AAAI, NeurIPS) and worked with
+            institutions such as the UK AI Security Institute and the
+            Cooperative AI Foundation.
           </p>
           <p className="text-base text-muted leading-relaxed mb-4">
-            I&apos;m broadly in this line of work because I think that AI will be
-            radically transformative, that our societies are not prepared for
-            these changes, and that there is a lot we can do to improve our
-            future outcomes relating to this technology.
+            My career in impact was sparked on a Vipassana meditation
+            retreat, inspired by the life of the{" "}
+            <a href="https://en.wikipedia.org/wiki/Bodhisattva" target="_blank" rel="noopener noreferrer" className="text-foreground underline underline-offset-2 hover:opacity-70 transition-opacity">bodhisattva</a>
+            {" "}and the experience of{" "}
+            <a href="https://en.wikipedia.org/wiki/Bodhicitta" target="_blank" rel="noopener noreferrer" className="text-foreground underline underline-offset-2 hover:opacity-70 transition-opacity">bodhicitta</a>
+            . I have maintained a simple, yet dedicated mindfulness practice
+            since 2018, and am also inspired by{" "}
+            <a href="https://en.wikipedia.org/wiki/Stoicism" target="_blank" rel="noopener noreferrer" className="text-foreground underline underline-offset-2 hover:opacity-70 transition-opacity">stoic philosophy</a>
+            .
           </p>
-          <p className="text-base text-muted leading-relaxed mb-4">
-            I&apos;m doing this in Cape Town because:
-          </p>
-          <ul className="list-disc list-outside pl-5 text-base text-muted leading-relaxed mb-4 space-y-1">
-            <li>I grew up here and felt compelled to coordinate among my peer group.</li>
-            <li>It&apos;s a beautiful, world-class city that is well situated to be a Schelling point for coordinating around AI risks and opportunities.</li>
-            <li>I think that South African talent is phenomenal and underappreciated.</li>
-            <li>The AI safety presence in Africa is minimal and by building this organisation I have been able to contribute something unique.</li>
-          </ul>
           <p className="text-base text-muted leading-relaxed">
-            I&apos;m interested in building physical hubs that are conducive to
-            incredible innovations, such as the{" "}
+            I&apos;m interested in building physical hubs that are conducive
+            to radical innovation, such as the{" "}
             <a href="https://en.wikipedia.org/wiki/Bell_Labs" target="_blank" rel="noopener noreferrer" className="text-foreground underline underline-offset-2 hover:opacity-70 transition-opacity">Bell Labs</a>
             {" "}or the{" "}
             <a href="https://en.wikipedia.org/wiki/Santa_Fe_Institute" target="_blank" rel="noopener noreferrer" className="text-foreground underline underline-offset-2 hover:opacity-70 transition-opacity">Santa Fe Institute</a>
-            . I&apos;m also very attracted to the{" "}
+            . I&apos;m also inspired by{" "}
             <a href="https://en.wikipedia.org/wiki/Solarpunk" target="_blank" rel="noopener noreferrer" className="text-foreground underline underline-offset-2 hover:opacity-70 transition-opacity">Solarpunk</a>
-            {" "}movement, and I believe that keeping{" "}
+            {" "}and{" "}
             <a href="https://en.wikipedia.org/wiki/Existential_hope" target="_blank" rel="noopener noreferrer" className="text-foreground underline underline-offset-2 hover:opacity-70 transition-opacity">Existential Hope</a>
-            {" "}in mind while working on catastrophic risk is essential for charting towards the right futures.
+            {" "}as movements that attempt to paint positive visions of the future.
           </p>
         </div>
       </section>
